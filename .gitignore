@@ -1,0 +1,6 @@
+/bin/
+## Mac OS Specific
+.DS_Store
+
+## Windows OS Specific
+Thumbs.db
