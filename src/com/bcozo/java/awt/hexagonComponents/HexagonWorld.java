@@ -7,28 +7,44 @@ public class HexagonWorld {
     private int rowCount;
     private int colCount;
     private int cellLengthOfSide;
-    
+
     public HexagonWorld(int rowCount, int colCount, int cellLengthOfSide) {
         this.rowCount = rowCount;
         this.colCount = colCount;
         this.cellLengthOfSide = cellLengthOfSide;
     }
 
-    public void init(HexagonPane hexagonPane){
+    public HexagonPane getPane() {
+        return pane;
+    }
+    
+    public int getCellLengthOfSide() {
+        return cellLengthOfSide;
+    }
+
+    public void init(HexagonPane hexagonPane) {
+        initPane(hexagonPane);
+        createCells();
+    }
+
+    public void initPane(HexagonPane hexagonPane) {
         this.pane = hexagonPane;
-        hexagonPane.setRowCount(rowCount);
-        hexagonPane.setColumnCount(colCount);
-        hexagonPane.setCellLengthOfSide(cellLengthOfSide);
-        hexagonPane.init();
+        this.pane.setRowCount(rowCount);
+        this.pane.setColumnCount(colCount);
+        this.pane.setCellLengthOfSide(cellLengthOfSide);
+        this.pane.init();
+    }
+
+    public void createCells() {
         HexagonCell cell;
-        Color bgColor = new Color(0, 0xff, 0, 100);
+        Color bgColor = new Color(0, 0, 0, 0);
         Color borderColor = new Color(0, 0, 0, 255);
         try {
-            for(int i = 0; i < rowCount; i ++){
-                for(int j = 0; j < colCount; j ++){
+            for (int i = 0; i < rowCount; i++) {
+                for (int j = 0; j < colCount; j++) {
                     cell = new HexagonCell(cellLengthOfSide);
-                    cell.setBackground(bgColor);
-                    cell.setBorderColor(borderColor);
+                    cell.setCellBackground(bgColor);
+                    cell.setCellBorder(borderColor);
                     cell.init();
                     this.pane.add(i, j, cell);
                 }
